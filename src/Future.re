@@ -75,3 +75,11 @@ let tapError = (future, f) => future |. tap(r => switch(r) {
   | Belt.Result.Error(v) => f(v) |. ignore
   | Ok(_) => ()
 });
+
+let flatMapArray = (xs: array('a), f: 'a => t('b), maxConcurrent) =>
+  make(resolve => {
+    let xlen = Array.length(xs);
+    for (_ in 1 to min(maxConcurrent, xlen)) {
+    };
+    ();
+  });
