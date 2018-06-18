@@ -140,3 +140,97 @@ let flatMapArrayUnsafe = (xs: array('a), f: 'a => t('b), maxConcurrent) =>
     };
     ();
   });
+
+let multi : (t('a), t('b)) => t(('a,'b)) = (a, b) =>
+  make(resolve => {
+    let n = ref(2);
+    let rA = ref(Js.Nullable.null);
+    let rB = ref(Js.Nullable.null);
+    let resol = (r, x) => {
+      r := Js.Nullable.return(x);
+      n := n^ - 1;
+      if (n^ == 0) {
+        resolve((
+          rA^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rB^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+        ));
+      }
+    };
+    a |. get(resol(rA));
+    b |. get(resol(rB));
+  });
+
+let multi3 : (t('a), t('b), t('c)) => t(('a,'b,'c)) = (a, b, c) =>
+  make(resolve => {
+    let n = ref(3);
+    let rA = ref(Js.Nullable.null);
+    let rB = ref(Js.Nullable.null);
+    let rC = ref(Js.Nullable.null);
+    let resol = (r, x) => {
+      r := Js.Nullable.return(x);
+      n := n^ - 1;
+      if (n^ == 0) {
+        resolve((
+          rA^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rB^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rC^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+        ));
+      }
+    };
+    a |. get(resol(rA));
+    b |. get(resol(rB));
+    c |. get(resol(rC));
+  });
+
+let multi4 : (t('a), t('b), t('c), t('d)) => t(('a,'b,'c,'d)) = (a, b, c, d) =>
+  make(resolve => {
+    let n = ref(4);
+    let rA = ref(Js.Nullable.null);
+    let rB = ref(Js.Nullable.null);
+    let rC = ref(Js.Nullable.null);
+    let rD = ref(Js.Nullable.null);
+    let resol = (r, x) => {
+      r := Js.Nullable.return(x);
+      n := n^ - 1;
+      if (n^ == 0) {
+        resolve((
+          rA^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rB^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rC^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rD^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+        ));
+      }
+    };
+    a |. get(resol(rA));
+    b |. get(resol(rB));
+    c |. get(resol(rC));
+    d |. get(resol(rD));
+  });
+
+let multi5 : (t('a), t('b), t('c), t('d), t('e)) => t(('a,'b,'c,'d,'e)) = (a, b, c, d, e) =>
+  make(resolve => {
+    let n = ref(5);
+    let rA = ref(Js.Nullable.null);
+    let rB = ref(Js.Nullable.null);
+    let rC = ref(Js.Nullable.null);
+    let rD = ref(Js.Nullable.null);
+    let rE = ref(Js.Nullable.null);
+    let resol = (r, x) => {
+      r := Js.Nullable.return(x);
+      n := n^ - 1;
+      if (n^ == 0) {
+        resolve((
+          rA^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rB^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rC^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rD^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+          rE^ |. Js.Nullable.toOption |. Belt.Option.getExn,
+        ));
+      }
+    };
+    a |. get(resol(rA));
+    b |. get(resol(rB));
+    c |. get(resol(rC));
+    d |. get(resol(rD));
+    e |. get(resol(rE));
+  });
