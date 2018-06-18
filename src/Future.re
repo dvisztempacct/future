@@ -234,3 +234,9 @@ let multi5 : (t('a), t('b), t('c), t('d), t('e)) => t(('a,'b,'c,'d,'e)) = (a, b,
     d |. get(resol(rD));
     e |. get(resol(rE));
   });
+
+/** like flatMapArray, but with maxConcurrent=Js.Int.max */
+let allArray = (xs, f) => flatMapArray(xs, f, Js.Int.max);
+
+/** like flatMapArrayUnsafe, but with maxConcurrent=Js.Int.max */
+let allArrayUnsafe = (xs, f) => flatMapArrayUnsafe(xs, f, Js.Int.max);
